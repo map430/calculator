@@ -1,0 +1,31 @@
+.calculatorContainer {
+    display: flex;
+    flex-direction: column;
+    height: 356px;
+    width: 520px;
+    background-color: red;
+}
+
+.screenContainer {
+    height: 100px;
+    width: 520px;
+    background-color: blue;
+}
+
+.row1, .row2, .row3, .row4, .row5 {
+    background: yellow;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+div.row2 button, div.row3 button, div.row4 button, div.row5 button {
+   height: 60px;
+   width: 60px;
+}
+
+div.row1 button {
+    height: 60px;
+    width: 120px;
+}

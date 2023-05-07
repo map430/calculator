@@ -1,22 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-        <link rel="stylesheet" href="style.css" />
-
-</head>
-<body>
-
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <script>
+      function sum(num1, num2) {
+        return num1 + num2
+      }
 
+      function subtract(num1, num2) {
+        return num1 - num2;
+      }
 
+      function multiply(num1, num2) {
+        return num1 * num2;
+      }
 
+      function divide(num1, num2) {
+        return num1 / num2;
+      }
+
+      function operate(num1, num2) {
+        if (userOperator === "+") {
+            return sum(num1, num2);
+        }else if (userOperator === "-") {
+            return subtract(num1, num2);
+        }else if (userOperator === "*") {
+            return multiply(num1, num2); 
+        }else if (userOperator === "/") {
+            return divide(num1, num2);
+        }
+        }
+      
+        let userOperator = "-";
+        console.log(operate(10, 2));
+ 
 
 
     </script>
-    
-</body>
+  </body>
 </html>

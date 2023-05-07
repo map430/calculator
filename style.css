@@ -20,12 +20,12 @@
     justify-content: center;
 }
 
-div.row2 button, div.row3 button, div.row4 button, div.row5 button {
+button {
    height: 60px;
    width: 60px;
 }
 
-div.row1 button {
+#equals {
     height: 60px;
     width: 120px;
 }

@@ -46,6 +46,7 @@
     </div>
 
     <script>
+      //operator functions perform basic math functions using two variables
       function sum(num1, num2) {
         return num1 + num2;
       }
@@ -62,6 +63,7 @@
         return num1 / num2;
       }
 
+      //operate function combines user inputs for numbers and operators to calculate a result
       function operate(num1, num2) {
         if (userOperator === "+") {
           return sum(num1, num2);
@@ -73,20 +75,42 @@
           return divide(num1, num2);
         }
       }
+      //selects screen and num button html elements, adds an event listener
+      //for each button and on click displays a number. Each subsequent click 
+      //concatenates the number to the screen text and disables the button after
+      //a certain number of clicks. Nested if statements handle decimal logic. 
       const screen = document.querySelector(".screen");
       const num = document.querySelectorAll(".num");
 
-      clickCount = 0;
+      clickCountNum = 0;
+      clickCountDecimal = 0
       num.forEach((button) => {
         button.addEventListener("click", () => {
-          clickCount++
-          if (clickCount <=5) {
-          let screenDisplay = screen.textContent + button.innerHTML;
-          screen.textContent = screenDisplay;
-          }else {
+          if (button.innerHTML === ".") {
+            if (clickCountDecimal <1 && screen.textContent !== "") {
+              clickCountDecimal++
+              screenDisplay = screen.textContent + button.innerHTML;
+              screen.textContent = screenDisplay;
+            }else if (clickCountDecimal <1 && screen.textContent === "") {
+              clickCountDecimal++
+                screenDisplay = "0" + button.innerHTML
+                screen.textContent = screenDisplay
+              }else if (clickCountDecimal > 1) {
+                button.disabled = true;
+              }
+          }else if (button.innerHTML !== ".") {
+          if (clickCountNum <5) {
+            clickCountNum++
+            screenDisplay = screen.textContent + button.innerHTML;
+            screen.textContent = screenDisplay;
+          } else {
             button.disabled = true;
-        }});
+          }
+        }
       });
+      });
+
+
 
       // let userOperator = "-";
       // console.log(operate(10, 2));

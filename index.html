@@ -20,28 +20,27 @@
           <button id="divide">÷</button>
         </div>
         <div class="row2">
-          <button id="7">7</button>
-          <button id="8">8</button>
-          <button id="9">9</button>
-          <button id="multiply">x</button>
+          <button class="num">7</button>
+          <button class="num">8</button>
+          <button class="num">9</button>
+          <button class="operator">x</button>
         </div>
         <div class="row3">
-          <button id="4">4</button>
-          <button id="5">5</button>
-          <button id="6">6</button>
-          <button id="subtract">-</button>
+          <button class="num">4</button>
+          <button class="num">5</button>
+          <button class="num">6</button>
+          <button class="operator">-</button>
         </div>
         <div class="row4">
-          <button id="1">1</button>
-          <button id="2">2</button>
-          <button id="3">3</button>
-          <button id="sum">+</button>
+          <button class="num">1</button>
+          <button class="num">2</button>
+          <button class="num">3</button>
+          <button class="operator">+</button>
         </div>
         <div class="row5">
-          <button id="0">0</button>
-          <button id="decimal">.</button>
-          <button id="equals">=</button>
-         
+          <button class="num">0</button>
+          <button class="num">.</button>
+          <button class="equals">=</button>
         </div>
       </div>
     </div>
@@ -74,9 +73,23 @@
           return divide(num1, num2);
         }
       }
+      const screen = document.querySelector(".screen");
+      const num = document.querySelectorAll(".num");
 
-      let userOperator = "-";
-      console.log(operate(10, 2));
+      clickCount = 0;
+      num.forEach((button) => {
+        button.addEventListener("click", () => {
+          clickCount++
+          if (clickCount <=5) {
+          let screenDisplay = screen.textContent + button.innerHTML;
+          screen.textContent = screenDisplay;
+          }else {
+            button.disabled = true;
+        }});
+      });
+
+      // let userOperator = "-";
+      // console.log(operate(10, 2));
     </script>
   </body>
 </html>

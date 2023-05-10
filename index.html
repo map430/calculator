@@ -75,11 +75,13 @@
           arr = Array.from(screen.textContent);
           arr.pop(arr.length - 1);
           screen.textContent = arr.join("");
+          userInputNum1 = parseFloat(screen.textContent);
         } else if (userInputOperator !== "") {
           clickCountNum2--;
           arr = Array.from(screen.textContent);
           arr.pop(arr.length - 1);
           screen.textContent = arr.join("");
+          userInputNum2 = parseFloat(screen.textContent);
         }
       });
 
@@ -239,6 +241,9 @@
         screen.textContent = "Infinity";
        }else {
         screen.textContent = operate(userInputNum1, userInputNum2);
+        userInputNum1 = parseFloat(screen.textContent);
+        clickCountOperator = 0;
+        clickCountNum2 = 0;
        }
       });
 

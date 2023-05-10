@@ -15,7 +15,7 @@
       <div class="keyboard">
         <div class="row1">
           <button class="clear">Clear</button>
-          <button class="delete">Delete</button>
+          <button class="del">Delete</button>
           <button class="percent">%</button>
           <button class="operator">÷</button>
         </div>
@@ -46,26 +46,48 @@
     </div>
 
     <script>
-     
+
+      //Clear button completely resets all variables and re-enables disabled buttons
       const clear = document.querySelector(".clear");
+      const buttons = document.querySelectorAll("button");
       clear.addEventListener("click", () => {
         screen.textContent = "";
         clickCountNum1 = 0;
         clickCountNum2 = 0;
         clickCountDecimal1 = 0;
-        clickCountDecimal2 = 0
+        clickCountDecimal2 = 0;
         screenDisplay = "";
         screenDisplay2 = "";
         userInputNum1 = 0;
         userInputNum2 = 0;
         userInputOperator = "";
+        buttons.forEach((button) => {
+          button.disabled = false;
+        });
+      });
+      //delete button removes one element in a string by converting it to an array
+      //popping out the last element, converting back to a string and logging the 
+      //value to screen.textContent
+      const del = document.querySelector(".del");
+      del.addEventListener("click", () => {
+        if (userInputOperator === "") {
+          clickCountNum1--;
+          arr = Array.from(screen.textContent);
+          arr.pop(arr.length - 1);
+          screen.textContent = arr.join("");
+        } else if (userInputOperator !== "") {
+          clickCountNum2--;
+          arr = Array.from(screen.textContent);
+          arr.pop(arr.length - 1);
+          screen.textContent = arr.join("");
+        }
       });
 
       // selects screen and num button html elements, adds an event listener
       // for each button and on click displays a number. Each subsequent click
       // concatenates the number to the screen text and disables the button after
       // a certain number of clicks. Nested if statements handle decimal logic.
-      
+
       const screen = document.querySelector(".screen");
       const num = document.querySelectorAll(".num");
 
@@ -74,8 +96,8 @@
       let screenDisplay = "";
       let userInputNum1 = 0;
 
-      clickCountNum2= 0;
-      clickCountDecimal2 =0;
+      clickCountNum2 = 0;
+      clickCountDecimal2 = 0;
       let screenDisplay2 = "";
       let userInputNum2 = 0;
 
@@ -83,105 +105,103 @@
 
       num.forEach((button) => {
         button.addEventListener("click", () => {
-          if (userInputOperator === "") { 
-          if (button.innerHTML === ".") {
-            if (clickCountDecimal1 < 1 && screen.textContent !== "") {
-              clickCountDecimal1++;
-              screenDisplay = screen.textContent + button.innerHTML;
-              screen.textContent = screenDisplay;
-              userInputNum1 = parseFloat(screenDisplay);
-              return userInputNum1
-            } else if (clickCountDecimal1 < 1 && screen.textContent === "") {
-              clickCountDecimal1++;
-              screenDisplay = "0" + button.innerHTML;
-              screen.textContent = screenDisplay;
-              userInputNum1 = parseFloat(screenDisplay);
-              return userInputNum1
-            } else if (clickCountDecimal1 > 1) {
-              button.disabled = true;
+          if (userInputOperator === "") {
+            if (button.innerHTML === ".") {
+              if (clickCountDecimal1 < 1 && screen.textContent !== "") {
+                clickCountDecimal1++;
+                screenDisplay = screen.textContent + button.innerHTML;
+                screen.textContent = screenDisplay;
+                userInputNum1 = parseFloat(screenDisplay);
+                return userInputNum1;
+              } else if (clickCountDecimal1 < 1 && screen.textContent === "") {
+                clickCountDecimal1++;
+                screenDisplay = "0" + button.innerHTML;
+                screen.textContent = screenDisplay;
+                userInputNum1 = parseFloat(screenDisplay);
+                return userInputNum1;
+              } else if (clickCountDecimal1 > 1) {
+                button.disabled = true;
+              }
+            } else if (button.innerHTML !== ".") {
+              if (clickCountNum1 < 5) {
+                clickCountNum1++;
+                screenDisplay = screen.textContent + button.innerHTML;
+                screen.textContent = screenDisplay;
+                userInputNum1 = parseFloat(screenDisplay);
+                return userInputNum1;
+              } else {
+                button.disabled = true;
+              }
             }
-          } else if (button.innerHTML !== ".") {
-            if (clickCountNum1 < 5) {
-              clickCountNum1++;
-              screenDisplay = screen.textContent + button.innerHTML;
-              screen.textContent = screenDisplay;
-              userInputNum1 = parseFloat(screenDisplay);
-              return userInputNum1
-            } else {
-              button.disabled = true;
+          } else if (userInputOperator !== "" && clickCountNum2 === 0) {
+            screen.textContent = "";
+            clickCountNum2++;
+            if (button.innerHTML === ".") {
+              if (clickCountDecimal2 < 1 && screen.textContent !== "") {
+                clickCountDecimal2++;
+                screenDisplay2 = screen.textContent + button.innerHTML;
+                screen.textContent = screenDisplay2;
+                userInputNum2 = parseFloat(screenDisplay2);
+                return userInputNum2;
+              } else if (clickCountDecimal2 < 1 && screen.textContent === "") {
+                clickCountDecimal2++;
+                screenDisplay2 = "0" + button.innerHTML;
+                screen.textContent = screenDisplay2;
+                userInputNum2 = parseFloat(screenDisplay2);
+                return userInputNum2;
+              } else if (clickCountDecimal2 > 1) {
+                button.disabled = true;
+              }
+            } else if (button.innerHTML !== ".") {
+              if (clickCountNum2 < 5) {
+                // clickCountNum2++;
+                screenDisplay2 = screen.textContent + button.innerHTML;
+                screen.textContent = screenDisplay2;
+                userInputNum2 = parseFloat(screenDisplay2);
+                return userInputNum2;
+              } else {
+                button.disabled = true;
+              }
             }
-          } 
-        }else if (userInputOperator !== "" && clickCountNum2 === 0) {
-          screen.textContent = "";
-          clickCountNum2++
-          if (button.innerHTML === ".") {
-            if (clickCountDecimal2 < 1 && screen.textContent !== "") {
-              clickCountDecimal2++;
-              screenDisplay2 = screen.textContent + button.innerHTML;
-              screen.textContent = screenDisplay2;
-              userInputNum2 = parseFloat(screenDisplay2);
-              return userInputNum2
-            } else if (clickCountDecimal2 < 1 && screen.textContent === "") {
-              clickCountDecimal2++;
-              screenDisplay2 = "0" + button.innerHTML;
-              screen.textContent = screenDisplay2;
-              userInputNum2 = parseFloat(screenDisplay2);
-              return userInputNum2
-            } else if (clickCountDecimal2 > 1) {
-              button.disabled = true;
-            }
-          }else if (button.innerHTML !== ".") {
-            if (clickCountNum2 < 5) {
-              // clickCountNum2++;
-              screenDisplay2 = screen.textContent + button.innerHTML;
-              screen.textContent = screenDisplay2;
-              userInputNum2 = parseFloat(screenDisplay2);
-              return userInputNum2
-            } else {
-              button.disabled = true;
+          } else if (userInputOperator !== "" && clickCountNum2 >= 1) {
+            if (button.innerHTML === ".") {
+              if (clickCountDecimal2 < 1) {
+                clickCountDecimal2++;
+                screenDisplay2 = screen.textContent + button.innerHTML;
+                screen.textContent = screenDisplay2;
+                userInputNum2 = parseFloat(screenDisplay2);
+                return userInputNum2;
+              } else if (clickCountDecimal2 > 1) {
+                button.disabled = true;
+              }
+            } else if (button.innerHTML !== ".") {
+              if (clickCountNum2 < 5) {
+                clickCountNum2++;
+                screenDisplay2 = screen.textContent + button.innerHTML;
+                screen.textContent = screenDisplay2;
+                userInputNum2 = parseFloat(screenDisplay2);
+                return userInputNum2;
+              } else {
+                button.disabled = true;
+              }
             }
           }
-          }else if (userInputOperator !== "" && clickCountNum2 >= 1) {
-          if (button.innerHTML === ".") {
-            if (clickCountDecimal2 < 1) {
-              clickCountDecimal2++;
-              screenDisplay2 = screen.textContent + button.innerHTML;
-              screen.textContent = screenDisplay2;
-              userInputNum2 = parseFloat(screenDisplay2);
-              return userInputNum2
-            } else if (clickCountDecimal2 > 1) {
-              button.disabled = true;
-            }
-          }else if (button.innerHTML !== ".") {
-            if (clickCountNum2 < 5) {
-              clickCountNum2++;
-              screenDisplay2 = screen.textContent + button.innerHTML;
-              screen.textContent = screenDisplay2;
-              userInputNum2 = parseFloat(screenDisplay2);
-              return userInputNum2
-            } else {
-              button.disabled = true;
-            }
-          }
-        }
         });
       });
 
-     
       const operator = document.querySelectorAll(".operator");
-      clickCountOperator = 0
+      clickCountOperator = 0;
       operator.forEach((button) => {
-      button.addEventListener("click", () => {
-        if (clickCountOperator <=1) {
-          clickCountOperator++
-        userInputOperator = userInputOperator +  button.innerHTML;
-        }else {
-          button.disabled = true;
-        }
-      });
+        button.addEventListener("click", () => {
+          if (clickCountOperator <= 1) {
+            clickCountOperator++;
+            userInputOperator = userInputOperator + button.innerHTML;
+          } else {
+            button.disabled = true;
+          }
+        });
       });
 
-          
       //operator functions perform basic math functions using two variables
       function sum(num1, num2) {
         return num1 + num2;

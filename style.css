@@ -1,19 +1,43 @@
-.calculatorContainer {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+    font-family: Roboto, sans-serif;
+}
+
+body {
+    background-color: #6d6d64 ;
     display: flex;
-    flex-direction: column;
-    height: 356px;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculatorContainer {
+    height: 650px;
     width: 520px;
-    background-color: red;
+    border: 1px solid black;
 }
 
 .screenContainer {
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    margin-left: 85px;
     height: 100px;
-    width: 520px;
-    background-color: bisque;
+    width: 350px;
+  
+}
+
+.screen {
+    display: flex;
+    justify-content: flex-end;
+    height: 50px;
+    font-size: 40px;
 }
 
 .row1, .row2, .row3, .row4, .row5 {
-    background: yellow;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -21,8 +45,11 @@
 }
 
 button {
-   height: 60px;
-   width: 60px;
+   height: 80px;
+   width: 80px;
+   border-radius: 50px;
+   margin: 2px;
+   background-color: #CCCCCC;
 }
 
 button[disabled] {
@@ -33,7 +60,7 @@ button[disabled] {
     border-color: buttonborder;
 }
 
-.equals {
-    height: 60px;
-    width: 120px;
+.equal {
+    height: 80px;
+    width: 160px;
 }

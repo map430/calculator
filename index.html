@@ -17,13 +17,13 @@
           <button class="clear">Clear</button>
           <button class="del">Delete</button>
           <button class="percent">%</button>
-          <button class="operator">÷</button>
+          <button class="operator">/</button>
         </div>
         <div class="row2">
           <button class="num">7</button>
           <button class="num">8</button>
           <button class="num">9</button>
-          <button class="operator">x</button>
+          <button class="operator">*</button>
         </div>
         <div class="row3">
           <button class="num">4</button>
@@ -154,7 +154,6 @@
               }
             } else if (button.innerHTML !== ".") {
               if (clickCountNum2 < 5) {
-                // clickCountNum2++;
                 screenDisplay2 = screen.textContent + button.innerHTML;
                 screen.textContent = screenDisplay2;
                 userInputNum2 = parseFloat(screenDisplay2);
@@ -195,7 +194,7 @@
         button.addEventListener("click", () => {
           if (clickCountOperator <= 1) {
             clickCountOperator++;
-            userInputOperator = userInputOperator + button.innerHTML;
+            userInputOperator = button.innerHTML;
           } else {
             button.disabled = true;
           }
@@ -220,30 +219,30 @@
       }
 
       //operate function combines user inputs for numbers and operators to calculate a result
-      let userOperator = "";
+      
       function operate(num1, num2) {
-        if (userOperator === "+") {
+        if (userInputOperator === "+") {
           return sum(num1, num2);
-        } else if (userOperator === "-") {
+        } else if (userInputOperator === "-") {
           return subtract(num1, num2);
-        } else if (userOperator === "*") {
+        } else if (userInputOperator === "*") {
           return multiply(num1, num2);
-        } else if (userOperator === "/") {
+        } else if (userInputOperator === "/") {
           return divide(num1, num2);
         }
       }
 
-      // const equal = document.querySelector(".equal");
+      const equal = document.querySelector(".equal");
 
-      // equal.addEventListener("click", () => {
-      //   num1 = userInputNum1;
-      //   num2 = userInputNum2;
-      //   userOperator = userInputOperator;
-      //   operate();
-      // });
+      equal.addEventListener("click", () => {
+       if (userInputNum2 === 0 && userInputOperator === "/") {
+        screen.textContent = "Infinity";
+       }else {
+        screen.textContent = operate(userInputNum1, userInputNum2);
+       }
+      });
 
-      /* When the equal button is hit fun the operate function 
-      where user num1=userInputNum1, num2 = userInputNum2, and userOperator = userInputOperator */
+    
 
       // let userOperator = "-";
       // console.log(operate(10, 2));

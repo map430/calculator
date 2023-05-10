@@ -70,6 +70,9 @@
       //value to screen.textContent
       const del = document.querySelector(".del");
       del.addEventListener("click", () => {
+        // if (clickCountNum1 >0 && (clickCountNum2 === 0 && clickCountDecimal2 === 0)){
+        // return;
+        // }
         if (userInputOperator === "") {
           clickCountNum1--;
           arr = Array.from(screen.textContent);
@@ -137,6 +140,7 @@
             }
           } else if (userInputOperator !== "" && clickCountNum2 === 0) {
             screen.textContent = "";
+            del.disabled = false;
             clickCountNum2++;
             if (button.innerHTML === ".") {
               if (clickCountDecimal2 < 1 && screen.textContent !== "") {
@@ -244,6 +248,8 @@
         userInputNum1 = parseFloat(screen.textContent);
         clickCountOperator = 0;
         clickCountNum2 = 0;
+        clickCountDecimal2 = 0;
+        del.disabled = true;
        }
       });
 

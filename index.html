@@ -47,11 +47,25 @@
 
     <script>
      
+      const clear = document.querySelector(".clear");
+      clear.addEventListener("click", () => {
+        screen.textContent = "";
+        clickCountNum1 = 0;
+        clickCountNum2 = 0;
+        clickCountDecimal1 = 0;
+        clickCountDecimal2 = 0
+        screenDisplay = "";
+        screenDisplay2 = "";
+        userInputNum1 = 0;
+        userInputNum2 = 0;
+        userInputOperator = "";
+      });
 
-      //selects screen and num button html elements, adds an event listener
-      //for each button and on click displays a number. Each subsequent click
-      //concatenates the number to the screen text and disables the button after
-      //a certain number of clicks. Nested if statements handle decimal logic.
+      // selects screen and num button html elements, adds an event listener
+      // for each button and on click displays a number. Each subsequent click
+      // concatenates the number to the screen text and disables the button after
+      // a certain number of clicks. Nested if statements handle decimal logic.
+      
       const screen = document.querySelector(".screen");
       const num = document.querySelectorAll(".num");
 
@@ -99,6 +113,7 @@
           } 
         }else if (userInputOperator !== "" && clickCountNum2 === 0) {
           screen.textContent = "";
+          clickCountNum2++
           if (button.innerHTML === ".") {
             if (clickCountDecimal2 < 1 && screen.textContent !== "") {
               clickCountDecimal2++;
@@ -117,7 +132,7 @@
             }
           }else if (button.innerHTML !== ".") {
             if (clickCountNum2 < 5) {
-              clickCountNum2++;
+              // clickCountNum2++;
               screenDisplay2 = screen.textContent + button.innerHTML;
               screen.textContent = screenDisplay2;
               userInputNum2 = parseFloat(screenDisplay2);
@@ -126,17 +141,11 @@
               button.disabled = true;
             }
           }
-          }else if (userInputOperator !== "") {
+          }else if (userInputOperator !== "" && clickCountNum2 >= 1) {
           if (button.innerHTML === ".") {
-            if (clickCountDecimal2 < 1 && screen.textContent !== "") {
+            if (clickCountDecimal2 < 1) {
               clickCountDecimal2++;
               screenDisplay2 = screen.textContent + button.innerHTML;
-              screen.textContent = screenDisplay2;
-              userInputNum2 = parseFloat(screenDisplay2);
-              return userInputNum2
-            } else if (clickCountDecimal2 < 1 && screen.textContent === "") {
-              clickCountDecimal2++;
-              screenDisplay2 = "0" + button.innerHTML;
               screen.textContent = screenDisplay2;
               userInputNum2 = parseFloat(screenDisplay2);
               return userInputNum2

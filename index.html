@@ -69,9 +69,6 @@
       //value to screen.textContent
       const del = document.querySelector(".del");
       del.addEventListener("click", () => {
-        // if (clickCountNum1 >0 && (clickCountNum2 === 0 && clickCountDecimal2 === 0)){
-        // return;
-        // }
         if (userInputOperator === "") {
           clickCountNum1--;
           arr = Array.from(screen.textContent);
@@ -198,6 +195,9 @@
       operator.forEach((button) => {
         button.addEventListener("click", () => {
           if (clickCountOperator <= 1) {
+            num.forEach((numButton) => {
+              numButton.disabled = false;
+            }) 
             clickCountOperator++;
             userInputOperator = button.innerHTML;
           } else {
@@ -255,6 +255,8 @@
           del.disabled = true;
         }
       });
+
+    // Create scientific notation to handle very large numbers
     </script>
   </body>
 </html>

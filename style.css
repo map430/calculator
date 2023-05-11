@@ -27,13 +27,13 @@ body {
     margin-left: 85px;
     height: 100px;
     width: 350px;
-  
 }
 
 .screen {
     display: flex;
     justify-content: flex-end;
     height: 50px;
+    width: 350px;
     font-size: 40px;
 }
 

@@ -46,7 +46,6 @@
     </div>
 
     <script>
-
       //Clear button completely resets all variables and re-enables disabled buttons
       const clear = document.querySelector(".clear");
       const buttons = document.querySelectorAll("button");
@@ -66,7 +65,7 @@
         });
       });
       //delete button removes one element in a string by converting it to an array
-      //popping out the last element, converting back to a string and logging the 
+      //popping out the last element, converting back to a string and logging the
       //value to screen.textContent
       const del = document.querySelector(".del");
       del.addEventListener("click", () => {
@@ -128,7 +127,7 @@
                 button.disabled = true;
               }
             } else if (button.innerHTML !== ".") {
-              if (clickCountNum1 < 5) {
+              if (clickCountNum1 < 9) {
                 clickCountNum1++;
                 screenDisplay = screen.textContent + button.innerHTML;
                 screen.textContent = screenDisplay;
@@ -159,7 +158,7 @@
                 button.disabled = true;
               }
             } else if (button.innerHTML !== ".") {
-              if (clickCountNum2 < 5) {
+              if (clickCountNum2 < 9) {
                 screenDisplay2 = screen.textContent + button.innerHTML;
                 screen.textContent = screenDisplay2;
                 userInputNum2 = parseFloat(screenDisplay2);
@@ -180,7 +179,7 @@
                 button.disabled = true;
               }
             } else if (button.innerHTML !== ".") {
-              if (clickCountNum2 < 5) {
+              if (clickCountNum2 < 9) {
                 clickCountNum2++;
                 screenDisplay2 = screen.textContent + button.innerHTML;
                 screen.textContent = screenDisplay2;
@@ -225,7 +224,7 @@
       }
 
       //operate function combines user inputs for numbers and operators to calculate a result
-      
+
       function operate(num1, num2) {
         if (userInputOperator === "+") {
           return sum(num1, num2);
@@ -241,22 +240,21 @@
       const equal = document.querySelector(".equal");
 
       equal.addEventListener("click", () => {
-       if (userInputNum2 === 0 && userInputOperator === "/") {
-        screen.textContent = "Infinity";
-       }else {
-        screen.textContent = operate(userInputNum1, userInputNum2);
-        userInputNum1 = parseFloat(screen.textContent);
-        clickCountOperator = 0;
-        clickCountNum2 = 0;
-        clickCountDecimal2 = 0;
-        del.disabled = true;
-       }
+        if (userInputNum2 === 0 && userInputOperator === "/") {
+          screen.textContent = "Infinity";
+        } else {
+          screen.textContent = operate(userInputNum1, userInputNum2);
+          let answerRounded = screen.textContent;
+          answerRounded = parseFloat(answerRounded);
+          answerRounded = answerRounded.toFixed(9);
+          userInputNum1 = parseFloat(answerRounded);
+          screen.textContent = userInputNum1;
+          clickCountOperator = 0;
+          clickCountNum2 = 0;
+          clickCountDecimal2 = 0;
+          del.disabled = true;
+        }
       });
-
-    
-
-      // let userOperator = "-";
-      // console.log(operate(10, 2));
     </script>
   </body>
 </html>

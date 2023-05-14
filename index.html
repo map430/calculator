@@ -110,11 +110,15 @@
           if (userInputOperator === "") {
             if (button.innerHTML === ".") {
               if (clickCountDecimal1 < 1 && screen.textContent !== "") {
+                  if (screen.textContent.length >=9) {
+                    return;
+                  }else {
                 clickCountDecimal1++;
                 screenDisplay = screen.textContent + button.innerHTML;
                 screen.textContent = screenDisplay;
                 userInputNum1 = parseFloat(screenDisplay);
                 return userInputNum1;
+                  }
               } else if (clickCountDecimal1 < 1 && screen.textContent === "") {
                 clickCountDecimal1++;
                 screenDisplay = "0" + button.innerHTML;
@@ -168,11 +172,15 @@
           } else if (userInputOperator !== "" && clickCountNum2 >= 1) {
             if (button.innerHTML === ".") {
               if (clickCountDecimal2 < 1) {
+                if (screen.textContent.length >=9) {
+                    return;
+                }else {
                 clickCountDecimal2++;
                 screenDisplay2 = screen.textContent + button.innerHTML;
                 screen.textContent = screenDisplay2;
                 userInputNum2 = parseFloat(screenDisplay2);
                 return userInputNum2;
+              }
               } else if (clickCountDecimal2 > 1) {
                 button.disabled = true;
               }
@@ -268,7 +276,11 @@
           answerRounded = parseFloat(answerRounded);
           answerRounded = answerRounded.toFixed(9);
           userInputNum1 = parseFloat(answerRounded);
-          screen.textContent = userInputNum1;
+          if (userInputNum1.toString().length >9) {
+            screen.textContent = userInputNum1.toExponential();
+          }else {
+            screen.textContent = userInputNum1;
+          }
           clickCountOperator = 0;
           clickCountNum2 = 0;
           clickCountDecimal2 = 0;

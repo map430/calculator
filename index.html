@@ -55,6 +55,7 @@
         clickCountNum2 = 0;
         clickCountDecimal1 = 0;
         clickCountDecimal2 = 0;
+        clickCountPercent = 0
         screenDisplay = "";
         screenDisplay2 = "";
         userInputNum1 = 0;
@@ -190,11 +191,30 @@
         });
       });
 
+      //Percent key divides user input by 100 
+      const percent = document.querySelector(".percent");
+      clickCountPercent = 0;
+      percent.addEventListener ("click", () => {
+        clickCountPercent++;
+        if (userInputNum1 === 0) {
+          screen.textContent = ""; 
+        }else if (userInputNum1 !== 0 && userInputOperator === "") {
+          userInputNum1 = userInputNum1/100;
+              screen.textContent = userInputNum1;
+              percent.disabled = true;
+        }else if (userInputOperator !== "" && userInputNum2 !== 0) {
+          userInputNum2 = userInputNum2/100;
+              screen.textContent = userInputNum2;
+              percent.disabled = true;
+        }
+      });
+
       const operator = document.querySelectorAll(".operator");
       clickCountOperator = 0;
       operator.forEach((button) => {
         button.addEventListener("click", () => {
           if (clickCountOperator <= 1) {
+            percent.disabled = false; 
             num.forEach((numButton) => {
               numButton.disabled = false;
             }) 

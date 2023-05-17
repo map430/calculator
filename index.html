@@ -144,6 +144,7 @@
           } else if (userInputOperator !== "" && clickCountNum2 === 0) {
             screen.textContent = "";
             del.disabled = false;
+            percent.disabled = false;
             clickCountNum2++;
             if (button.innerHTML === ".") {
               if (clickCountDecimal2 < 1 && screen.textContent !== "") {
@@ -294,6 +295,7 @@
           clickCountNum2 = 0;
           clickCountDecimal2 = 0;
           del.disabled = true;
+          percent.disabled=true;
         }
       });
 
